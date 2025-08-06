@@ -1,0 +1,1037 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 50%, #ffa0b4 100%);
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hello Kitty Rain Animation */
+.hello-kitty-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: url('images/hello_kitty_heart_background.png') repeat;
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+}
+
+.hello-kitty-item {
+    position: absolute;
+    animation: fall linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Music Player */
+.music-dedication {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 100px 0;
+}
+
+.music-player-container {
+    display: flex;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.music-player {
+    background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 400px;
+    position: relative;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.music-player::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #ffc0cb, #ffb6c1);
+    z-index: -1;
+    /* animation: borderRotate 4s linear infinite; */
+}
+
+.album-art {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.album-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.album-art.playing img {
+    /* animation: spin 10s linear infinite; */
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 20, 147, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.play-button:hover {
+    background: rgba(255, 20, 147, 1);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-button i {
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 2px;
+}
+
+.song-info {
+    flex: 1;
+}
+
+.song-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.artist-name {
+    font-size: 1rem;
+    color: #666;
+    margin: 0 0 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 105, 180, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Lyrics Card */
+.lyrics-card {
+    background: linear-gradient(135deg, #fff 0%, #fef7ff 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    min-width: 350px;
+    max-height: 400px;
+    position: relative;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.lyrics-card::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ffc0cb, #ff69b4, #ff1493, #ffb6c1);
+    z-index: -1;
+    animation: borderRotate 6s linear infinite reverse;
+}
+
+.lyrics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 105, 180, 0.2);
+}
+
+.lyrics-header h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.lyrics-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff1493;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff1493;
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.lyrics-content {
+    padding-right: 10px;
+}
+
+.lyric-line {
+    padding: 8px 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.lyric-line.active {
+    color: #ff1493;
+    font-weight: 600;
+    background: rgba(255, 105, 180, 0.1);
+    transform: translateX(5px);
+}
+
+.lyric-line.passed {
+    color: #999;
+    opacity: 0.7;
+}
+
+/* Custom scrollbar for lyrics */
+.lyrics-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lyrics-content::-webkit-scrollbar-track {
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 3px;
+}
+
+.lyrics-content::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 3px;
+}
+
+.lyrics-content::-webkit-scrollbar-thumb:hover {
+    background: #ff1493;
+}
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('images/hello_kitty_heart_background.png') center/cover;
+    color: white;
+    position: relative;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out 0.5s both;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-indicator {
+    animation: fadeInUp 1s ease-out 1s both;
+}
+
+.scroll-indicator span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.arrow-down {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+    margin: 0 auto;
+    animation: bounce 2s infinite;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(45deg);
+    }
+    40% {
+        transform: translateY(-10px) rotate(45deg);
+    }
+    60% {
+        transform: translateY(-5px) rotate(45deg);
+    }
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Love Message */
+.love-message {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.message-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.love-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: justify;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Photo Gallery - Polaroid Style */
+.photo-gallery {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 100px 0;
+}
+
+.gallery-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.polaroid-card {
+    background: white;
+    padding: 20px 20px 60px 20px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: rotate(-2deg);
+    transition: all 0.4s ease;
+    position: relative;
+    max-width: 280px;
+}
+
+.polaroid-card:nth-child(2) {
+    transform: rotate(1deg);
+    margin-top: -20px;
+}
+
+.polaroid-card:nth-child(3) {
+    transform: rotate(-1deg);
+    margin-top: 10px;
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 3px;
+    position: relative;
+}
+
+.polaroid-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.polaroid-card:hover .polaroid-photo img {
+    transform: scale(1.1);
+}
+
+.polaroid-text {
+    text-align: center;
+    margin-top: 15px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Heart decoration on polaroids */
+.polaroid-card::before {
+    content: '💕';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    background: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.polaroid-card:nth-child(2)::before {
+    content: '💖';
+}
+
+.polaroid-card:nth-child(3)::before {
+    content: '💗';
+}
+
+.photo-frame:hover {
+    transform: translateY(-10px) scale(1.02) rotate(0deg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.photo-frame:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+/* Removed character-overlay styles */
+
+/* Relationship Counter */
+.relationship-counter {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.counter-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.counter-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.counter-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.counter-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ff69b4;
+    margin-bottom: 0.5rem;
+}
+
+.counter-label {
+    font-size: 1rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.counter-message {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    color: white;
+    font-style: italic;
+}
+
+/* Music Dedication */
+.music-dedication {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Final Message */
+.final-message {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    text-align: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.final-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+}
+
+.final-text {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+
+.heart-symbol {
+    font-size: 4rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .message-card {
+        padding: 2rem;
+    }
+    
+    .player {
+        width: 100%;
+    }
+    
+    .counter-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .love-text {
+        font-size: 1rem;
+    }
+    
+    .player {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+    
+    .album-cover {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .controls {
+        margin-top: 15px;
+        justify-content: center;
+    }
+    
+    .repeat, .playlist, .heart {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+
+/* Romantic Quotes Section */
+.romantic-quotes {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 100px 0;
+}
+
+.quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.quote-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.quote-card::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #ffc0cb, #ffb6c1);
+    z-index: -1;
+    animation: borderRotate 8s linear infinite;
+}
+
+.quote-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
+}
+
+.quote-image {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.quote-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.quote-card:hover .quote-image img {
+    transform: scale(1.1);
+}
+
+.quote-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255, 105, 180, 0.3) 100%);
+}
+
+.quote-text {
+    padding: 2rem;
+    position: relative;
+}
+
+.quote-text::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 4rem;
+    color: #ff69b4;
+    font-family: 'Dancing Script', cursive;
+    opacity: 0.3;
+}
+
+.quote-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+}
+
+/* Floating hearts decoration */
+.quote-card::after {
+    content: '💕';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.quote-card:nth-child(2)::after {
+    content: '💖';
+    animation-delay: 1s;
+}
+
+.quote-card:nth-child(3)::after {
+    content: '💗';
+    animation-delay: 2s;
+}
+
+
+/* Responsive Design for Music Player */
+@media (max-width: 768px) {
+    .music-player-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .music-player {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .lyrics-card {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .album-art {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .play-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .play-button i {
+        font-size: 1rem;
+    }
+    
+    .song-title {
+        font-size: 1.3rem;
+    }
+    
+    .quotes-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .polaroid-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .music-player {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .album-art {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .song-info {
+        width: 100%;
+    }
+    
+    .lyrics-card {
+        max-height: 300px;
+    }
+    
+    .gallery-grid {
+        gap: 1.5rem;
+    }
+    
+    .polaroid-card {
+        transform: none !important;
+        margin-top: 0 !important;
+    }
+    
+    .polaroid-card:hover {
+        transform: scale(1.02) !important;
+    }
+}
+
+
+
+/* New Lyrics Display */
+.lyrics-display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 150px; /* Adjust as needed */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left: 20px; /* Space between player and lyrics */
+}
+
+.current-lyric {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ff1493;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.current-lyric.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments for the new lyrics display */
+@media (max-width: 768px) {
+    .lyrics-display {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .current-lyric {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .current-lyric {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+/* Lyrics Display */
+.lyrics-display {
+    margin-top: 2rem;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* Fundo completamente transparente */
+    padding: 0; /* Removendo padding */
+}
+
+.current-lyric {
+    font-family: 'Rush Flow', cursive; /* Aplicando a nova fonte */
+    font-size: 3rem;
+    color: #ff1493;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    font-weight: normal;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+    background: transparent; /* Garantindo que o texto também não tenha fundo */
+}
+
+.current-lyric.active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInScale 0.8s ease-out forwards; /* Nova animação */
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Music Section Content */
+.music-section-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Responsive adjustments for counter */
+@media (max-width: 768px) {
+    .counter-card {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .counter-item {
+        padding: 1.5rem;
+    }
+    
+    .counter-number {
+        font-size: 2rem;
+    }
+    
+    .counter-label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .current-lyric {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+@font-face {
+    font-family: 'Rush Flow';
+    src: url('fonts/RUSH_FLOW.ttf') format('truetype'),
+         url('fonts/RUSH_FLOW.woff') format('woff'),
+         url('fonts/RUSH_FLOW.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
